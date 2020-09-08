@@ -2,13 +2,33 @@ import React from 'react';
 import { Card, CardContent, Typography, Grid } from '@material-ui/core';
 import CountUp from 'react-countup';
 import cx from 'classnames';
+import Lottie from 'react-lottie';
+import loader from '../../lotties/loader.json';
 
 import styles from './Cards.module.css';
 
 const Cards = ({ data: { confirmed, recovered, deaths, lastUpdate } }) => {
+    const defaultOptions = {
+        loop: true,
+        autoplay: true, 
+        animationData: loader,
+        rendererSettings: {
+          preserveAspectRatio: 'xMidYMid slice'
+        }
+      };
+
     if (!confirmed) {
-        return 'Loading...'
+        return (
+            <div className={styles.container}>
+                <Lottie 
+                options={defaultOptions}
+                height={200}
+                width={200}
+            />
+            </div>
+        )
     }
+
     return (
         <div className={styles.container} >
             <Grid container spacing={3} justify="center">
